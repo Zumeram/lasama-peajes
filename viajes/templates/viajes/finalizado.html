@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finalizado - {{ viaje.codigo }}</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:600px;margin:40px auto;padding:20px;background:#f7f7f5;text-align:center}
+.card{background:white;padding:32px;border-radius:20px;border:1px solid #e5e5e5}
+.big{font-size:42px;font-weight:800;margin:12px 0}
+.badge{display:inline-block;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.ok{background:#dcfce7;color:#166534} .err{background:#fee2e2;color:#991b1b}
+.btn{display:inline-block;margin-top:16px;padding:12px 20px;background:#111;color:white;border-radius:10px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card">
+<div style="font-size:48px">✅</div>
+<h1>Viaje Finalizado</h1>
+<div class="big">{{ viaje.codigo }}</div>
+<div class="big" style="color:#111">${{ total }}</div>
+<p>Total de {{ viaje.peajes.count }} boletas</p>
+{% if mensaje %}
+<div style="margin-top:16px" class="badge {% if 'Enviado' in mensaje %}ok{% else %}err{% endif %}">{{ mensaje }}</div>
+{% endif %}
+<a class="btn" href="/">← Volver al inicio</a>
+</div>
+<p style="color:#888;margin-top:16px;font-size:13px">Se generó Excel + PDF y se intentó enviar a finanzas@lasama.cl</p>
+</body>
+</html>
