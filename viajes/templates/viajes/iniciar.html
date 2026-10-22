@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniciar Viaje - LASAMA</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:500px;margin:40px auto;padding:20px;background:#f7f7f5}
+form{background:white;padding:24px;border-radius:16px;border:1px solid #e5e5e5}
+input{width:100%;padding:12px;margin:8px 0 16px 0;border:1px solid #ddd;border-radius:8px;font-size:16px}
+button{width:100%;background:#111;color:white;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600}
+a{color:#666}
+</style>
+</head>
+<body>
+<a href="/">← Volver</a>
+<h1>Nuevo Viaje</h1>
+<form method="POST">
+{% csrf_token %}
+<label>Origen</label>
+<input name="origen" value="Rengo" required>
+<label>Destino</label>
+<input name="destino" value="Chiloé" required>
+<button type="submit">Iniciar Viaje 🚛</button>
+</form>
+</body>
+</html>
