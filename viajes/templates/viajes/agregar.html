@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agregar Peaje - {{ viaje.codigo }}</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:500px;margin:30px auto;padding:20px;background:#f7f7f5}
+form{background:white;padding:24px;border-radius:16px;border:1px solid #e5e5e5}
+label{font-size:13px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.5px}
+input,select{width:100%;padding:12px;margin:6px 0 16px 0;border:1px solid #ddd;border-radius:10px;font-size:16px;box-sizing:border-box}
+button{width:100%;background:#111;color:white;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600}
+</style>
+</head>
+<body>
+<a href="/viaje/{{ viaje.codigo }}/">← {{ viaje.codigo }}</a>
+<h1>Agregar Boleta</h1>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<label>Tipo</label>
+<select name="tipo">
+<option value="TRONCAL">TRONCAL</option>
+<option value="LATERAL">LATERAL</option>
+</select>
+<label>Nombre Peaje</label>
+<input name="nombre" placeholder="Ej: Peaje Quinta" required>
+<label>Monto $</label>
+<input name="monto" type="number" placeholder="Ej: 4500" required>
+<label>Foto Boleta (opcional)</label>
+<input name="imagen" type="file" accept="image/*">
+<button type="submit">Guardar Boleta</button>
+</form>
+</body>
+</html>
