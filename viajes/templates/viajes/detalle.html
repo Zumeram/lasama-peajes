@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ viaje.codigo }} - LASAMA</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:0 auto;padding:20px;background:#f7f7f5}
+.header{background:white;padding:20px;border-radius:16px;border:1px solid #e5e5e5;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.btn{padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block}
+.btn-dark{background:#111;color:white} .btn-light{background:white;border:1px solid #ddd;color:#111}
+.item{background:white;padding:14px 16px;border-radius:12px;border:1px solid #e5e5e5;display:flex;justify-content:space-between;margin:8px 0}
+.total{background:#111;color:white;padding:16px;border-radius:12px;display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin-top:16px}
+</style>
+</head>
+<body>
+<a href="/">← Todos los viajes</a>
+<div class="header" style="margin-top:12px">
+<div>
+<h1 style="margin:0">{{ viaje.codigo }}</h1>
+<p style="margin:4px 0;color:#666">{{ viaje.origen }} → {{ viaje.destino }}</p>
+</div>
+<div>
+<a class="btn btn-light" href="/viaje/{{ viaje.codigo }}/agregar/">+ Agregar Peaje</a>
+<a class="btn btn-dark" href="/viaje/{{ viaje.codigo }}/finalizar/">Finalizar y Enviar</a>
+</div>
+</div>
+
+<h3 style="margin-top:24px">Boletas ({{ viaje.peajes.count }})</h3>
+{% for p in viaje.peajes.all %}
+<div class="item">
+<div><strong>{{ p.tipo }}</strong> - {{ p.nombre }}<br><small style="color:#888">{{ p.fecha|date:"d/m H:i" }}</small></div>
+<div style="font-weight:700">${{ p.monto }}</div>
+</div>
+{% empty %}
+<p>No hay peajes aún. Agrega el primero.</p>
+{% endfor %}
+
+{% with total=viaje.peajes.all %}{% endwith %}
+<div class="total">
+<span>TOTAL ACUMULADO</span>
+<span>${% for p in viaje.peajes.all %}{% if forloop.first %}{% endif %}{% endfor %}{{ viaje.peajes.all|length }} boletas</span>
+</div>
+<p style="color:#888;margin-top:8px;font-size:13px">El total real se calcula al finalizar.</p>
+</body>
+</html>
