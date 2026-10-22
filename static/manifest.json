@@ -1,0 +1,16 @@
+{
+  "name":"LASAMA Peajes",
+  "short_name":"LASAMA",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#ffffff",
+  "theme_color":"#E30613",
+  "icons":
+  [
+    {
+      "src":"https://cdn-icons-png.flaticon.com/512/3774/3774096.png",   
+      "sizes":"512x512",
+      "type":"image/png"
+    }
+  ]
+}
