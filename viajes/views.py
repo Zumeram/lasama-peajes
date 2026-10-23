@@ -36,17 +36,31 @@ def dashboard_finanzas(request):
     return render(request, 'viajes/finanzas.html', context)
 
 def iniciar_viaje(request):
-    if request.method == 'POST':
-        viaje = Viaje.objects.create(
-            codigo=generar_codigo(),
-            origen=request.POST.get('origen','RENGO'),
-            destino=request.POST.get('destino','CHILOE'),
-            patente=request.POST.get('patente',''),
-            chofer=request.POST.get('chofer',''),
-        )
-        return redirect('detalle_viaje', codigo=viaje.codigo)
-    return render(request, 'viajes/iniciar.html')
+    if request.method == "POST":
+        origen = request.POST.get("origen","").strip()  # ← AHORA EN BLANCO
+        destino = request.POST.get("destino","").strip() # ← AHORA EN BLANCO
+        patente = request.POST.get("patente","").strip()
+        chofer = request.POST.get("chofer","").strip()
+        
+        # Validar que ingrese datos reales
+        if not origen or not destino:
+            return render(request, "viajes/iniciar.html", {"error": "Debes ingresar origen y destino"})
+        
+        # Generar código LASAMA-RENG-CHIL-YYYYMMDD-001
+        from datetime import datetime
+        hoy = datetime.now().strftime("%Y%m%d")
+        count = Viaje.objects.filter(codigo__contains=hoy).count() + 1
+        codigo = f"LASAMA-{origen[:4].upper()}-{destino[:4].upper()}-{hoy}-{count:03d}"
 
+        viaje = Viaje.objects.create(
+            codigo=codigo,
+            origen=origen,
+            destino=destino,
+            patente=patente,
+            chofer=chofer
+        )
+        return redirect(f"/viaje/{codigo}/")
+    return render(request, "viajes/iniciar.html")
 def detalle_viaje(request, codigo):
     viaje = get_object_or_404(Viaje, codigo=codigo)
     peajes = viaje.peajes.all()
