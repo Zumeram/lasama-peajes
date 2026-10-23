@@ -2,10 +2,10 @@ from django.db import models
 
 class Viaje(models.Model):
     codigo = models.CharField(max_length=50, unique=True)
-    origen = models.CharField(max_length=100, default="Rengo")
-    destino = models.CharField(max_length=100, default="Chiloé")
-    patente = models.CharField(max_length=20, blank=True, null=True, default="")
-    chofer = models.CharField(max_length=100, blank=True, null=True, default="")
+    origen = models.CharField(max_length=100, blank=True, default="")
+    destino = models.CharField(max_length=100, blank=True, default="")
+    patente = models.CharField(max_length=20, blank=True, default="")
+    chofer = models.CharField(max_length=100, blank=True, default="")
     fecha_inicio = models.DateTimeField(auto_now_add=True)
     finalizado = models.BooleanField(default=False)
 
