@@ -5,49 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LASAMA - Chofer</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="manifest" href="/static/manifest.json">
 <meta name="theme-color" content="#0d2a54">
 </head>
 <body class="bg-[#f5f7fa] min-h-screen">
-
 <div class="bg-[#0d2a54] text-white p-6 rounded-b- shadow-xl">
   <div class="flex gap-2 items-center">
     <div class="w-9 h-9 bg-white rounded-xl flex items-center justify-center text-[#0d2a54] font-black">L</div>
-    <div>
-      <div class="font-black text-white text-sm">LASAMA</div>
-      <div class="text-xs text-blue-200 tracking-widest">TRANSPORTES REFRIGERADOS</div>
-    </div>
-    <span class="ml-auto text-xl">🚛❄️</span>
+    <div><div class="font-black text-sm">LASAMA</div><div class="text-xs text-blue-200">TRANSPORTES REFRIGERADOS</div></div>
   </div>
-  <h1 class="text-3xl font-black leading-none mt-8 text-white">¿Listo para<br>la ruta?</h1>
-  <p class="text-blue-200 text-sm mt-3">Control de peajes y barcazas</p>
+  <h1 class="text-3xl font-black mt-8">¿Listo para<br>la ruta?</h1>
   <div class="flex justify-center mt-6">
-    <a href="/iniciar/" class="w-28 h-28 bg-[#163a70] rounded-full flex flex-col items-center justify-center shadow-xl border-4 border-[#2a5aa0]">
-      <span class="text-4xl text-white">+</span>
-      <span class="text-xs text-blue-200 font-bold">NUEVO</span>
+    <a href="/iniciar/" class="w-40 h-40 bg-[#163a70] rounded-full flex flex-col items-center justify-center border-4 border-[#2a5aa0] shadow-xl">
+      <span class="text-5xl text-white">+</span><span class="text-xs text-blue-200 font-bold">NUEVO</span>
     </a>
   </div>
-  <a href="/iniciar/" class="block mt-8 bg-white text-[#0d2a54] text-center py-4 rounded-full font-black">INICIAR NUEVO VIAJE ➜</a>
+  <a href="/iniciar/" class="block mt-8 bg-white text-[#0d2a54] text-center py-4 rounded-full font-black text-lg">INICIAR NUEVO VIAJE →</a>
 </div>
 
 <div class="p-4 max-w-md mx-auto">
-  <div class="flex justify-between items-center mt-4 mb-3">
-    <h2 class="font-black text-[#0d2a54] text-sm">Mis Viajes En Curso</h2>
-    <span class="bg-white border px-3 py-1 rounded-full text-xs">{{ viajes|length }} activo</span>
-  </div>
+  <h2 class="font-black text-[#0d2a54] text-sm mt-4 mb-3">Mis Viajes En Curso - {{ viajes|length }} activo</h2>
   {% for v in viajes %}
-  <div class="bg-white p-4 rounded-2xl mb-3 shadow-sm border">
+  <div class="bg-white p-4 rounded-2xl mb-3 border">
     <div class="font-mono text-xs text-gray-400">{{ v.codigo }}</div>
     <div class="font-bold text-[#0d2a54]">{{ v.origen }} → {{ v.destino }}</div>
-    <div class="text-xs text-gray-500">{{ v.patente }}</div>
-    <a href="/viaje/{{ v.codigo }}/" class="block mt-3 bg-[#0d2a54] text-white text-center py-2 rounded-xl text-sm font-bold">Continuar →</a>
+    <a href="/viaje/{{ v.codigo }}/" class="block mt-3 bg-[#0d2a54] text-white text-center py-3 rounded-xl font-bold">Continuar agregando boletas →</a>
   </div>
   {% empty %}
   <div class="bg-white p-8 rounded-2xl text-center border-dashed border">
     <div class="font-bold text-[#0d2a54] text-sm">No tienes viajes activos</div>
     <div class="text-xs text-gray-400">Presiona + NUEVO</div>
   </div>
+  {% endfor %}
 </div>
-
 </body>
 </html>
