@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LASAMA Finanzas</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-slate-100">
+<div class="flex min-h-screen">
+  <div class="w-72 bg-[#0d2a54] text-white p-6 flex flex-col">
+    <div class="flex gap-3 items-center"><div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#0d2a54] font-black">L</div><div><div class="font-black">LASAMA</div><div class="text-xs text-blue-300">FINANZAS</div></div></div>
+    <nav class="mt-10 space-y-1 text-sm"><div class="bg-white text-[#0d2a54] p-3 rounded-xl font-bold">📊 Dashboard Finanzas</div><a href="/" class="block p-3 text-blue-200">🚛 Vista Choferes</a></nav>
+    <div class="mt-auto bg-[#163a70] rounded-2xl p-4"><div class="text-xs text-blue-200">CORREO AUTOMÁTICO</div><div class="font-bold text-white text-xs">finanzas@lasama.cl</div></div>
+  </div>
+  <div class="flex-1 p-8">
+    <h1 class="text-2xl font-black text-[#0d2a54]">Control de Peajes - Finanzas</h1>
+    <p class="text-sm text-gray-500">Datos reales, sin dummy. Parten en 0 hasta que chofer suba boletas.</p>
+    <div class="grid grid-cols-4 gap-4 mt-6">
+      <div class="bg-white p-5 rounded-2xl border shadow-sm"><div class="text-xs text-gray-400">TOTAL MES (REAL)</div><div class="text-3xl font-black text-[#0d2a54]">${{ total_mes|default:0 }}</div>{% if total_mes == 0 %}<div class="text-xs text-orange-500">Sin movimientos aún</div>{% endif %}</div>
+      <div class="bg-white p-5 rounded-2xl border shadow-sm"><div class="text-xs text-gray-400">PEAJES VALIDADOS</div><div class="text-3xl font-black text-[#0d2a54]">{{ peajes_validados|default:0 }}</div><div class="text-xs text-gray-400">{{ peajes_validados }} boletas reales</div></div>
+      <div class="bg-white p-5 rounded-2xl border shadow-sm"><div class="text-xs text-gray-400">VIAJES ACTIVOS</div><div class="text-3xl font-black text-[#0d2a54]">{{ viajes_activos|default:0 }}</div><div class="text-xs text-gray-400">{% if viajes_activos == 0 %}Ninguno en ruta{% else %}{{ viajes_activos }} en curso{% endif %}</div></div>
+      <div class="bg-white p-5 rounded-2xl border shadow-sm"><div class="text-xs text-gray-400">BARCAZAS</div><div class="text-3xl font-black text-[#0d2a54]">{{ barcazas|default:0 }}</div><div class="text-xs text-gray-400">Chacao / Puelche</div></div>
+    </div>
+    <div class="bg-white rounded-2xl mt-8 border shadow-sm overflow-hidden">
+      <div class="p-6 flex justify-between border-b"><span class="font-black text-[#0d2a54]">Viajes Registrados (Datos Reales)</span><span class="bg-gray-100 px-3 py-1 rounded-full text-xs">{{ viajes|length }} viajes</span></div>
+      <table class="w-full text-sm"><thead class="bg-gray-50 text-xs text-gray-400"><tr><th class="p-4 text-left">CÓDIGO</th><th>RUTA</th><th>PATENTE</th><th>TOTAL</th><th>ESTADO</th></tr></thead><tbody>{% for v in viajes %}<tr class="border-t"><td class="p-4 font-mono text-xs">{{ v.codigo }}</td><td class="font-bold">{{ v.origen }} - {{ v.destino }}</td><td>{{ v.patente }}</td><td>${{ v.total|default:0 }}</td><td><a href="/viaje/{{ v.codigo }}/" class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs">{% if v.finalizado %}FINALIZADO{% else %}EN CURSO{% endif %}</a></td></tr>{% empty %}<tr><td colspan=5 class="p-12 text-center text-gray-400">Sin viajes. Todo en 0 hasta que el trabajador suba datos reales.<br><span class="text-xs">Prueba creando uno en <a href="/" class="text-[#0d2a54] font-bold">lasama.onrender.com</a></span></td></tr>{% endfor %}</tbody></table>
+    </div>
+  </div>
+</div>
+</body></html>
