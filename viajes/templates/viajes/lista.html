@@ -10,65 +10,46 @@
 </head>
 <body class="bg-[#f5f7fa] min-h-screen">
 
-<!-- HEADER AZUL MARINO -->
 <div class="bg-[#0d2a54] text-white p-6 rounded-b- shadow-xl">
   <div class="flex gap-2 items-center">
     <div class="w-9 h-9 bg-white rounded-xl flex items-center justify-center text-[#0d2a54] font-black">L</div>
     <div>
-      <div class="font-black tracking-wider text-white text-sm">LASAMA</div>
-      <div class="text- text-blue-200 tracking-widest">TRANSPORTES REFRIGERADOS</div>
+      <div class="font-black text-white text-sm">LASAMA</div>
+      <div class="text-xs text-blue-200 tracking-widest">TRANSPORTES REFRIGERADOS</div>
     </div>
     <span class="ml-auto text-xl">🚛❄️</span>
   </div>
-  
-  <h1 class="text- font-black leading-none mt-8 text-white">¿Listo para<br>la ruta?</h1>
-  <p class="text-blue-200 text-sm mt-3 font-medium">Control de peajes y barcazas</p>
-  
+  <h1 class="text-3xl font-black leading-none mt-8 text-white">¿Listo para<br>la ruta?</h1>
+  <p class="text-blue-200 text-sm mt-3">Control de peajes y barcazas</p>
   <div class="flex justify-center mt-6">
-    <a href="/iniciar/" class="w-28 h-28 bg-[#163a70] rounded-full flex flex-col items-center justify-center shadow-xl border-4 border-[#2a5aa0] active:scale-95 transition">
-      <span class="text-4xl font-light text-white">+</span>
-      <span class="text-xs text-blue-200 font-bold tracking-wider">NUEVO</span>
+    <a href="/iniciar/" class="w-28 h-28 bg-[#163a70] rounded-full flex flex-col items-center justify-center shadow-xl border-4 border-[#2a5aa0]">
+      <span class="text-4xl text-white">+</span>
+      <span class="text-xs text-blue-200 font-bold">NUEVO</span>
     </a>
   </div>
-  
-  <a href="/iniciar/" class="block mt-8 bg-white text-[#0d2a54] text-center py-4 rounded-full font-black shadow-lg active:scale-95 transition">
-    INICIAR NUEVO VIAJE ➜
-  </a>
-  
-  <p class="text-center text-blue-300 text- mt-3">Rengo → Chiloé • Sistema automático</p>
+  <a href="/iniciar/" class="block mt-8 bg-white text-[#0d2a54] text-center py-4 rounded-full font-black">INICIAR NUEVO VIAJE ➜</a>
 </div>
 
-<!-- LISTA DE VIAJES EN CURSO - SOLO DATOS REALES -->
-<div class="p-4 pb-20 max-w-md mx-auto">
+<div class="p-4 max-w-md mx-auto">
   <div class="flex justify-between items-center mt-4 mb-3">
     <h2 class="font-black text-[#0d2a54] text-sm">Mis Viajes En Curso</h2>
-    <span class="bg-white border px-3 py-1 rounded-full text-xs text-gray-500">{{ viajes|length }} activo{{ viajes|length|pluralize }}</span>
+    <span class="bg-white border px-3 py-1 rounded-full text-xs">{{ viajes|length }} activo</span>
   </div>
-
   {% for v in viajes %}
-  <div class="bg-white p-4 rounded-2xl mb-3 shadow-sm border border-gray-100">
-    <div class="flex justify-between items-start">
-      <div class="flex-1">
-        <div class="font-mono text- text-gray-400">{{ v.codigo }}</div>
-        <div class="font-bold text-[#0d2a54] text-sm mt-1">{{ v.origen }} → {{ v.destino }}</div>
-        <div class="text-xs text-gray-500 mt-1">🚛 {{ v.patente }} • {{ v.fecha_inicio|date:"d/m H:i" }}</div>
-      </div>
-      <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text- font-bold">EN CURSO</span>
-    </div>
-    <a href="/viaje/{{ v.codigo }}/" class="block mt-3 bg-[#0d2a54] text-white text-center py-2.5 rounded-xl text-sm font-bold">
-      Continuar agregando boletas →
-    </a>
+  <div class="bg-white p-4 rounded-2xl mb-3 shadow-sm border">
+    <div class="font-mono text-xs text-gray-400">{{ v.codigo }}</div>
+    <div class="font-bold text-[#0d2a54]">{{ v.origen }} → {{ v.destino }}</div>
+    <div class="text-xs text-gray-500">{{ v.patente }}</div>
+    <a href="/viaje/{{ v.codigo }}/" class="block mt-3 bg-[#0d2a54] text-white text-center py-2 rounded-xl text-sm font-bold">Continuar →</a>
   </div>
   {% empty %}
-  <div class="bg-white p-8 rounded-2xl text-center border border-dashed border-gray-200 mt-4">
-    <div class="text-3xl mb-2">🧾</div>
+  <div class="bg-white p-8 rounded-2xl text-center border-dashed border">
     <div class="font-bold text-[#0d2a54] text-sm">No tienes viajes activos</div>
-    <div class="text-xs text-gray-400 mt-1">Presiona + NUEVO para iniciar<br>Rengo → Chiloé</div>
+    <div class="text-xs text-gray-400">Presiona + NUEVO</div>
   </div>
   {% endfor %}
-
   <div class="mt-8 text-center">
-    <a href="/finanzas/" class="text-xs text-gray-400 underline">¿Eres de Finanzas? Ir al Dashboard →</a>
+    <a href="/finanzas/" class="text-xs text-gray-400 underline">¿Eres Finanzas? Ir al Dashboard →</a>
   </div>
 </div>
 
